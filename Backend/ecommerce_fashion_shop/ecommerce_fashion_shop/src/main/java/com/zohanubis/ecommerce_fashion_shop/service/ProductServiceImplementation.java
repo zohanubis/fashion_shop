@@ -1,9 +1,9 @@
 package com.zohanubis.ecommerce_fashion_shop.service;
 
-import com.zohanubis.ecommerce_fashion_shop.repository.CategoryRepository;
 import com.zohanubis.ecommerce_fashion_shop.exception.ProductException;
 import com.zohanubis.ecommerce_fashion_shop.model.Category;
 import com.zohanubis.ecommerce_fashion_shop.model.Product;
+import com.zohanubis.ecommerce_fashion_shop.repository.CategoryRepository;
 import com.zohanubis.ecommerce_fashion_shop.repository.ProductRepository;
 import com.zohanubis.ecommerce_fashion_shop.request.CreateProductRequest;
 import org.springframework.data.domain.Page;

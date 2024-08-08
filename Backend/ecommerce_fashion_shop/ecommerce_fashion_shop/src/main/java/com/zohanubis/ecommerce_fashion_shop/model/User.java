@@ -2,9 +2,6 @@ package com.zohanubis.ecommerce_fashion_shop.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
-
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     private String firstName;
@@ -22,28 +19,32 @@ public class User {
     private String email;
     private String role;
     private String mobile;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> address = new ArrayList<>();
 
-    @Embedded
     @ElementCollection
     @CollectionTable(name = "payment_information", joinColumns = @JoinColumn(name = "user_id"))
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PaymentInformation> paymentInformations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Rating> ratings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
+
     private LocalDateTime createdAt;
 
-    public User(){
-
+    // Default constructor
+    public User() {
     }
 
+    // Parameterized constructor
     public User(Long id, String firstName, String lastName, String password, String email, String role, String mobile, List<Address> address, List<PaymentInformation> paymentInformations, List<Rating> ratings, List<Review> reviews, LocalDateTime createdAt) {
-        super();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,6 +59,7 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
