@@ -2,7 +2,6 @@ package com.zohanubis.ecommerce_fashion_shop.service;
 
 import com.zohanubis.ecommerce_fashion_shop.model.User;
 import com.zohanubis.ecommerce_fashion_shop.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +14,6 @@ import java.util.List;
 @Service
 public class CustomerUserServiceImplementation implements UserDetailsService {
 
-	@Autowired
     public UserRepository userRepository;
 
     public CustomerUserServiceImplementation(UserRepository userRepository){

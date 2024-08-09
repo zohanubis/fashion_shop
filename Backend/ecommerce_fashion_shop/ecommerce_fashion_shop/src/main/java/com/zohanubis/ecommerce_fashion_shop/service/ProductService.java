@@ -4,8 +4,10 @@ import com.zohanubis.ecommerce_fashion_shop.exception.ProductException;
 import com.zohanubis.ecommerce_fashion_shop.model.Product;
 import com.zohanubis.ecommerce_fashion_shop.request.CreateProductRequest;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface ProductService {
     public Product createProduct(CreateProductRequest request) ;

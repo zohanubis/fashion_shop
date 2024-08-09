@@ -1,5 +1,6 @@
 package com.zohanubis.ecommerce_fashion_shop.service;
 
+import com.zohanubis.ecommerce_fashion_shop.config.JWTProvider;
 import com.zohanubis.ecommerce_fashion_shop.exception.UserException;
 import com.zohanubis.ecommerce_fashion_shop.model.User;
 import com.zohanubis.ecommerce_fashion_shop.repository.UserRepository;
@@ -11,12 +12,15 @@ import java.util.Optional;
 @Service
 public class UserServiceImplementation implements UserService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
+    private JWTProvider jwtProvider;
 
-    @Autowired
-    public UserServiceImplementation(UserRepository userRepository) {
+    public UserServiceImplementation(UserRepository userRepository, JWTProvider jwtProvider) {
         this.userRepository = userRepository;
+        this.jwtProvider = jwtProvider;
     }
+
+
 
     @Override
     public User findUserById(Long userId) throws UserException {
@@ -31,20 +35,11 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User findUserProfileByJwt(String jwt) throws UserException {
-        // Giải mã JWT để lấy thông tin người dùng, rồi tìm kiếm trong cơ sở dữ liệu
-        String userEmail = decodeJwtToGetUserEmail(jwt);  // Đây là phương thức giả định để giải mã JWT
-        Optional<User> user = userRepository.findByEmail(userEmail);
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            throw new UserException("User not found with JWT: " + jwt);
+        String email = jwtProvider.getEmailFromToken(jwt);
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new UserException("User not found with email: " + email);
         }
-    }
-
-    private String decodeJwtToGetUserEmail(String jwt) {
-        // Giả định phương thức giải mã JWT để lấy email người dùng
-        // Trong thực tế, bạn sẽ cần sử dụng một thư viện JWT để giải mã và xác thực JWT
-        // Ví dụ: sử dụng thư viện jjwt hoặc java-jwt
-        return "decodedEmail@example.com";
+        return user;
     }
 }

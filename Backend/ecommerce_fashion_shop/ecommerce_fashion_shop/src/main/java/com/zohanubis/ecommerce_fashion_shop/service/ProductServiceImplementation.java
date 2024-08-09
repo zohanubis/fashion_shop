@@ -6,6 +6,7 @@ import com.zohanubis.ecommerce_fashion_shop.model.Product;
 import com.zohanubis.ecommerce_fashion_shop.repository.CategoryRepository;
 import com.zohanubis.ecommerce_fashion_shop.repository.ProductRepository;
 import com.zohanubis.ecommerce_fashion_shop.request.CreateProductRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,10 +20,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImplementation implements ProductService {
-
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
-    private final UserService userService;
+    public ProductRepository productRepository;
+    public CategoryRepository categoryRepository;
+    public UserService userService;
 
     public ProductServiceImplementation(ProductRepository productRepository, CategoryRepository categoryRepository, UserService userService) {
         this.productRepository = productRepository;
@@ -119,12 +119,12 @@ public class ProductServiceImplementation implements ProductService {
         if (stock != null) {
             if (stock.equals("in_stock")) {
                 products = products.stream().filter(product -> product.getQuantity() > 0).collect(Collectors.toList());
-            }else if (stock.equals("out_of_stock")) {
+            } else if (stock.equals("out_of_stock")) {
                 products = products.stream().filter(product -> product.getQuantity() < 1).collect(Collectors.toList());
             }
         }
         int startIndex = (int) pageable.getOffset();
-        int endIndex = Math.min(startIndex + pageable.getPageSize(),products.size());
+        int endIndex = Math.min(startIndex + pageable.getPageSize(), products.size());
 
         List<Product> pageContents = products.subList(startIndex, endIndex);
         Page<Product> filteredPage = new PageImpl<>(pageContents, pageable, products.size());
