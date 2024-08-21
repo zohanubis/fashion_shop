@@ -20,9 +20,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImplementation implements ProductService {
+
     public ProductRepository productRepository;
     public CategoryRepository categoryRepository;
     public UserService userService;
+
 
     public ProductServiceImplementation(ProductRepository productRepository, CategoryRepository categoryRepository, UserService userService) {
         this.productRepository = productRepository;

@@ -5,7 +5,7 @@ import com.zohanubis.ecommerce_fashion_shop.model.Cart;
 import com.zohanubis.ecommerce_fashion_shop.model.User;
 import com.zohanubis.ecommerce_fashion_shop.request.AddItemRequest;
 
-public interface CartItemService {
+public interface CartService {
 
         public Cart createCart(User user);
 

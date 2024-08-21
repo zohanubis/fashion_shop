@@ -14,12 +14,12 @@ import com.zohanubis.ecommerce_fashion_shop.model.User;
 public class OrderServiceImplementation implements OrderService {
 
     private CartRepository cartRepository;
-    private CartItemService cartItemService;
+    private CartService cartService;
     private ProductService productService;
 
-    public OrderServiceImplementation(CartRepository cartRepository, CartItemService cartItemService, ProductService productService) {
+    public OrderServiceImplementation(CartRepository cartRepository, CartService cartService, ProductService productService) {
         this.cartRepository = cartRepository;
-        this.cartItemService = cartItemService;
+        this.cartService = cartService;
         this.productService = productService;
     }
 

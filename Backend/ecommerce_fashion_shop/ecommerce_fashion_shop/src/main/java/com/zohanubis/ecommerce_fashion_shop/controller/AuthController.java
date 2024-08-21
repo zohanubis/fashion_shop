@@ -2,10 +2,13 @@ package com.zohanubis.ecommerce_fashion_shop.controller;
 
 import com.zohanubis.ecommerce_fashion_shop.config.JWTProvider;
 import com.zohanubis.ecommerce_fashion_shop.exception.UserException;
+import com.zohanubis.ecommerce_fashion_shop.model.Cart;
 import com.zohanubis.ecommerce_fashion_shop.model.User;
 import com.zohanubis.ecommerce_fashion_shop.repository.UserRepository;
 import com.zohanubis.ecommerce_fashion_shop.request.LoginRequest;
 import com.zohanubis.ecommerce_fashion_shop.response.AuthResponse;
+import com.zohanubis.ecommerce_fashion_shop.service.CartService;
+import com.zohanubis.ecommerce_fashion_shop.service.CartServiceImplementation;
 import com.zohanubis.ecommerce_fashion_shop.service.CustomerUserServiceImplementation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +31,14 @@ public class AuthController {
     private JWTProvider jwtProvider;
     private PasswordEncoder passwordEncoder;
     private CustomerUserServiceImplementation customerUserService;
+    private CartService cartService;
 
-    public AuthController(UserRepository userRepository, CustomerUserServiceImplementation customerUserServiceImplementation
-            , PasswordEncoder passwordEncoder , JWTProvider jwtProvider) {
+    public AuthController(UserRepository userRepository, JWTProvider jwtProvider, PasswordEncoder passwordEncoder, CustomerUserServiceImplementation customerUserService, CartService cartService) {
         this.userRepository = userRepository;
-        this.customerUserService = customerUserService;
-        this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
+        this.passwordEncoder = passwordEncoder;
+        this.customerUserService = customerUserService;
+        this.cartService = cartService;
     }
 
     @PostMapping("/signup")
@@ -58,12 +62,16 @@ public class AuthController {
 
         User savedUser = userRepository.save(createUser);
 
+        Cart cart = cartService.createCart(savedUser);
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtProvider.generateToken(authentication);
 
-        AuthResponse authResponse = new AuthResponse(token, "Signup Successfully");
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setJwt(token);
+        authResponse.setMessage("Successfully created user");
 
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
     }
@@ -78,7 +86,9 @@ public class AuthController {
 
         String token = jwtProvider.generateToken(authentication);
 
-        AuthResponse authResponse = new AuthResponse(token, "Signin Successfully");
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setJwt(token);
+        authResponse.setMessage("Successfully logged in");
 
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
 

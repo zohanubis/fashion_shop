@@ -1,2 +1,4 @@
-package com.zohanubis.ecommerce_fashion_shop.controller;public class HomeController {
+package com.zohanubis.ecommerce_fashion_shop.controller;
+
+public class HomeController {
 }
