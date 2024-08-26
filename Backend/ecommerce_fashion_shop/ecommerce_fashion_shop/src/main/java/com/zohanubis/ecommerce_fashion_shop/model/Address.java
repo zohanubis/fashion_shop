@@ -33,12 +33,14 @@ public class Address {
     @JsonIgnore
     private User user;
 
+    private String shippingAddress;
 
     private String mobile;
 
-    public Address(){
+    public Address() {
 
     }
+
     public Address(Long id, String first_name, String last_name, String streetAdress, String city, String state, String zipCode, User user, String mobile) {
         this.id = id;
         this.first_name = first_name;

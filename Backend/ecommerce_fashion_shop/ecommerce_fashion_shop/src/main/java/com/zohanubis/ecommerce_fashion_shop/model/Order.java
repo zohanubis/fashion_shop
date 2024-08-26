@@ -1,6 +1,7 @@
 package com.zohanubis.ecommerce_fashion_shop.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,8 @@ public class Order {
     @OneToOne
     private Address deliveryAddress;
 
+    @OneToOne
+    private Address shippingAddress;
     @Embedded
     private PaymentDetails paymentDetails = new PaymentDetails();
 
@@ -46,13 +49,14 @@ public class Order {
     private LocalDateTime createdAt;
 
     // Default no-arg constructor required by JPA
-    public Order() {}
+    public Order() {
+    }
 
     // Parameterized constructor
-    public Order(Long id, String orderId, User user, List<OrderItem> orderItemList, LocalDateTime orderDate,
-                 LocalDateTime deliveryDate, Address deliveryAddress, PaymentDetails paymentDetails,
-                 double totalPrice, Integer totalDiscountedPrice, Integer discount, String orderStatus,
-                 int totalItem, LocalDateTime createdAt) {
+
+
+    public Order(Long id, String orderId, User user, List<OrderItem> orderItemList, LocalDateTime orderDate, LocalDateTime deliveryDate, Address deliveryAddress, Address shippingAdsdress, PaymentDetails paymentDetails, double totalPrice, Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createdAt) {
+        super();
         this.id = id;
         this.orderId = orderId;
         this.user = user;
@@ -60,6 +64,7 @@ public class Order {
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.deliveryAddress = deliveryAddress;
+        this.shippingAddress = shippingAdsdress;
         this.paymentDetails = paymentDetails;
         this.totalPrice = totalPrice;
         this.totalDiscountedPrice = totalDiscountedPrice;
@@ -179,5 +184,13 @@ public class Order {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Address getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(Address shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 }
