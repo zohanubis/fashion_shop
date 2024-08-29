@@ -45,12 +45,6 @@ const LoginForm = () => {
                     </Grid>
                 </Grid>
             </form>
-            <div>
-                <div>
-                    <p>Ì you have already account ? </p>
-                    <Button onClick={() => navigate('/login')}></Button>
-                </div>
-            </div>
         </div>
     );
 };
