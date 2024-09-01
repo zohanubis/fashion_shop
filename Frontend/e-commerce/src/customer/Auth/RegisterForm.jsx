@@ -69,7 +69,7 @@ const RegisterForm = () => {
             </form>
             <div className="flex justify-center flex-col items-center">
                 <div className="py-3 flex items-center">
-                    <p>Ì you have already account ? </p>
+                    <p>If you have already account ? </p>
                     <Button onClick={() => navigate('/login')} className="ml-5" size="small">
                         Login
                     </Button>
