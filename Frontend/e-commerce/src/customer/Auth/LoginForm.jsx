@@ -45,6 +45,14 @@ const LoginForm = () => {
                     </Grid>
                 </Grid>
             </form>
+            <div className="flex justify-center flex-col items-center">
+                <div className="py-3 flex items-center">
+                    <p>If you have already account ? </p>
+                    <Button onClick={() => navigate('/register')} className="ml-5" size="small">
+                        Login
+                    </Button>
+                </div>
+            </div>
         </div>
     );
 };
