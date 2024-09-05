@@ -132,4 +132,9 @@ public class ProductServiceImplementation implements ProductService {
         Page<Product> filteredPage = new PageImpl<>(pageContents, pageable, products.size());
         return filteredPage;
     }
+
+    @Override
+    public void deleteProductById(Long productId) {
+
+    }
 }

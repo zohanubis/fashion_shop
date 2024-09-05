@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +47,12 @@ public class ProductController {
     public ResponseEntity<Product> findProductById(@PathVariable Long productId) throws ProductException {
         Product product = productService.findProductById(productId);
         return new ResponseEntity<>(product, HttpStatus.ACCEPTED);
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("products/id/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
+        productService.deleteProductById(productId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

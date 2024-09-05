@@ -74,4 +74,14 @@ public class CartServiceImplementation implements CartService {
 
         return cartRepository.save(cart);
     }
+
+    @Override
+    public void removeCartItem(Long id, Long cartItemId) {
+
+    }
+
+    @Override
+    public Cart updateCartItem(Long id, CartItem cartItem) {
+        return null;
+    }
 }
