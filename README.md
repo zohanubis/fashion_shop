@@ -38,6 +38,7 @@ src
 │   │       ├── repository        # Các repository JPA
 │   │       ├── service           # Các dịch vụ logic nghiệp vụ
 │   │       └── config            # Cấu hình ứng dụng và bảo mật
+│   │       └── reponse
 │   └── resources
 │       ├── application.properties # Cấu hình ứng dụng
 └── test                          # Các bài test đơn vị và tích hợp
