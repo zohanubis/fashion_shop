@@ -39,37 +39,12 @@ src
 │   │       ├── service           # Các dịch vụ logic nghiệp vụ
 │   │       └── config            # Cấu hình ứng dụng và bảo mật
 │   │       └── reponse
+│   │       └── request
+│   │       └── exception
 │   └── resources
 │       ├── application.properties # Cấu hình ứng dụng
 └── test                          # Các bài test đơn vị và tích hợp
 **
 **
-##Các Thư Mục Chính
-##Model:
 
-Chứa tất cả các thực thể (entities) được sử dụng trong ứng dụng như Product, Cart, Order, và User.
-Các thực thể được quản lý bởi Hibernate (JPA) và được annotate với Lombok để đơn giản hóa mã nguồn.
-##Controller:
-
-Chứa các API RESTful để quản lý người dùng, sản phẩm, giỏ hàng và đơn hàng.
-Các controller tiêu biểu bao gồm ProductController, CartController, OrderController, v.v.
-Service:
-
-Chứa logic nghiệp vụ của ứng dụng.
-Các service tiêu biểu bao gồm ProductService, CartService, OrderService.
-Repository:
-
-Chứa các repository JPA để thực hiện các thao tác CRUD với các thực thể.
-Các repository tiêu biểu bao gồm ProductRepository, CartRepository, UserRepository.
-Config:
-
-Chứa các file cấu hình cho bảo mật và quản lý JWT token (JWTProvider, SecurityConfig).
-##Cài Đặt và Cấu Hình
-##Yêu Cầu
-Java 21: Đảm bảo Java 21 đã được cài đặt trên máy.
-Maven: Đảm bảo Maven đã được cài đặt để quản lý các phụ thuộc.
-MySQL: Cài đặt và cấu hình cơ sở dữ liệu MySQL.
-Clone Repository
-git clone https://github.com/yourusername/ecommerce_fashion_shop.git
-cd ecommerce_fashion_shop
 
