@@ -44,3 +44,6 @@ src
 └── test                          # Các bài test đơn vị và tích hợp
 **
 **
+git clone https://github.com/yourusername/ecommerce_fashion_shop.git
+cd ecommerce_fashion_shop
+
